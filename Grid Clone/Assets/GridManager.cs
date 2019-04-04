@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public GameObject _gem1;
+    public GameObject _gem2;
+    public GameObject _gem3;
+    public GameObject _gem4;
+    public GameObject _gem5;
     const int COLS = 5;
     const int ROWS = 3;
     int[,] _gems = new int[COLS, ROWS];
