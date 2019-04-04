@@ -11,7 +11,7 @@ public class GridManager : MonoBehaviour
     public GameObject _gem4;
     public GameObject _gem5;
     const int COLS = 5;
-    const int ROWS = 3;
+    const int ROWS = 7;
     int[,] _gems = new int[COLS, ROWS];
     public GameObject _gemPrefab;
     // Start is called before the first frame update
@@ -44,7 +44,7 @@ public class GridManager : MonoBehaviour
             {
                 Debug.Log("Gem" + x + "," + y + ":" + _gems[x, y]);
                 GameObject gem = GameObject.Instantiate(_gemPrefab);
-                gem.transform.position = new Vector3(x, y, 0);
+                gem.transform.position = new Vector3(x, y, 0) * 1.2f;
              //    gem.GetComponent<GemScript>().SetColor(_gems[x, y]); //need to make own GemScript and SetColor void for this to work 
             }
 
