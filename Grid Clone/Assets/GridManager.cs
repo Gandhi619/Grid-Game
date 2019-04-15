@@ -5,51 +5,88 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public static int[,] _gemGrid;
+
+    int _gemtype;
+
     public GameObject _gem1;
     public GameObject _gem2;
     public GameObject _gem3;
     public GameObject _gem4;
     public GameObject _gem5;
+    public GameObject player;
     const int COLS = 5;
     const int ROWS = 7;
     int[,] _gems = new int[COLS, ROWS];
-    public GameObject _gemPrefab;
+    
     // Start is called before the first frame update
     void Start()
     {
-       
 
-       
-        for (int x = 0; x < COLS; x++)
+
+        _gemGrid = new int[7, 5]
+       {
+            { 0,0,0,0,0},
+            { 0,0,0,0,0},
+            { 0,0,0,0,0},
+            { 0,0,0,0,0},
+            { 0,0,0,0,0},
+            { 0,0,0,0,0},
+            { 0,0,0,0,0},
+       };
+
+        for (int i = 0; i < 7; i++)
         {
-            for (int y = 0; y < ROWS; y++)
+            for (int ii = 0; ii < 5; ii++)
             {
-                int color = Random.Range(0, 9);
-                _gems[x, y] = color;
+                _gemtype = (Random.Range(0, 5));
+                _gemGrid[i, ii] = _gemtype;
+
+                if (i == 3 && ii == 2) //spawns player
+                {
+
+                    _gemtype = 7;
+                }
+
+                if (_gemtype == 0)
+                {
+                    Instantiate(_gem1, new Vector3(ii, i), Quaternion.identity);
+                }
+                if (_gemtype == 1)
+                {
+                    Instantiate(_gem2, new Vector3(ii, i), Quaternion.identity);
+                }
+                if (_gemtype == 2)
+                {
+                    Instantiate(_gem3, new Vector3(ii, i), Quaternion.identity);
+                }
+                if (_gemtype == 3)
+                {
+                    Instantiate(_gem4, new Vector3(ii, i), Quaternion.identity);
+                }
+                if (_gemtype == 4)
+                {
+                    Instantiate(_gem5, new Vector3(ii, i), Quaternion.identity);
+                }
+
+                if (_gemtype == 7)
+                {
+                    Instantiate(player, new Vector3(ii, i), Quaternion.identity);
+                }
+
+                
+                
             }
         }
 
 
 
-        InstantiateGems();
+       
        
 
     }
 
-    void InstantiateGems()
-    {
-        for (int x = 0; x < COLS; x++)
-        {
-            for (int y = 0; y < ROWS; y++)
-            {
-                Debug.Log("Gem" + x + "," + y + ":" + _gems[x, y]);
-                GameObject gem = GameObject.Instantiate(_gemPrefab);
-                gem.transform.position = new Vector3(x, y, 0) * 1.2f;
-             //    gem.GetComponent<GemScript>().SetColor(_gems[x, y]); //need to make own GemScript and SetColor void for this to work 
-            }
-
-        }
-    }
+    
     // Update is called once per frame
     void Update()
     {
